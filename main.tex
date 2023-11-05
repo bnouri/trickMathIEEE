@@ -1,0 +1,1085 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[journal]{IEEEtran}
+\usepackage{BNieee}
+\begin{document}
+\bstctlcite{IEEEexample:BSTcontrol} %For the controls in bib file 
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%   Title:   %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Math Equations in IEEEtran.sty}
+\author{Behzad~Nouri}
+\maketitle
+\begin{abstract}
+	In this document, I will use the following packages in preamble with the intention of keeping it as simple as possible.
+	
+	To restore IEEEtran’s ability to automatically break within multiline equations, load \texttt{amsmath} in
+	preamble like:
+	\begin{verbatim}
+	\usepackage{amsmath}
+	\interdisplaylinepenalty=2500
+	\usepackage{amssymb}  %Inld: \mathbb{}
+	\end{verbatim}
+\verb!amsmath! is a comprehensive package which contains many helpful tools including enhancing the multiline alignment environments.	
+\end{abstract}
+
+\bigskip
+\par\noindent \dotfill
+\par\noindent \textbf{Note:} Marked by {\color{red} \Large $\mathbf{\times}$} shows it not a preferred solution with \texttt{IEEEtran.sty}!
+\par\noindent\dotfill
+
+%--------------------------------------------------------------------------
+\tableofcontents
+%--------------------------------------------------------------------------
+
+
+\newpage
+%--------------------------------------------------------------------------
+\section{In-Line Equations \texttt{(\$ \$)}}
+%--------------------------------------------------------------------------
+In line equation $\frac{x}{y}$ as \verb!$\frac{x}{y}$!\par
+Or in-line display: $\dfrac{x}{y}$ as \verb!$\dfrac{x}{y}$!
+
+
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\section{Display Equations \texttt{(\$\$ \$\$)}} \label{ch:display-eq}
+%--------------------------------------------------------------------------
+\[x = \sum_{i=0}^{z} 2^{i}Q\]
+
+\verb!\[x = \sum_{i=0}^{z} 2^{i}Q\]!
+
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\section{Enumerated Equations}
+%--------------------------------------------------------------------------
+Equations are created using the traditional equation environment as
+
+\begin{equation} 
+a = \sum_{k=1}^n\sum_{\ell=1}^n \sin \bigl(2\pi \, b_k \, c_{\ell} \, h \bigr)
+\end{equation}
+
+\begin{verbatim}
+\begin{equation}  \label{eq:}
+a = \sum_{k=1}^n\sum_{\ell=1}^n
+\sin \bigl(2\pi\,b_k\,c_{\ell}\,h\bigr)
+\end{equation}
+\end{verbatim}
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\section{Non-Enumerated Equations {\color{red} \Large $\mathbf{\times}$}}
+%--------------------------------------------------------------------------
+Another possibility to display an equation without showing its number is as shown below.
+
+\begin{equation*}
+x = \sum_{i=0}^{z} 2^{i}Q 
+\end{equation*}
+
+\begin{verbatim}
+\begin{equation*}
+x = \sum_{i=0}^{z} 2^{i}Q
+\end{equation*}
+\end{verbatim}
+
+But it is preferable to use the \verb!displaymath! environment in \Sec{ch:display-eq} instead of the ``Non-Enumerated'' form.
+
+If an equation is too big to be written in one line We also can split it in two or more lines as shown in the following sections.
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\section{Standard \texttt{eqnarray}: {\color{red} \Large $\mathbf{\times}$}}
+%--------------------------------------------------------------------------
+One way is using the standard (\LaTeX-built-in) \texttt{eqnarray} environment. \LaTeX\ built-in \verb!eqnarray! but it has  several shortcomings. Nevertheless, it is instructive to show a simple example using the standard \verb!eqnarray! in order to show some math spacing under \LaTeX. 
+
+\setlength{\arraycolsep}{0.0em}
+\begin{eqnarray}
+Z&{}={}&x_1 + x_2 + x_3 + x_4 + x_5 + x_6\nonumber\\
+&&{+}\:a + b
+\end{eqnarray}
+\setlength{\arraycolsep}{5pt}
+
+\begin{verbatim}
+\setlength{\arraycolsep}{0.0em}
+\begin{eqnarray}
+Z&{}={}&x_1 + x_2 + x_3 + x_4 + x_5 + x_6
+\nonumber\\
+&&{+}\:a + b
+\end{eqnarray}
+\setlength{\arraycolsep}{5pt}
+\end{verbatim}
+
+In \TeX’s math mode, spacing around operators can be inhibited by enclosing them within
+braces (e.g., \verb!{=}\:!) or forced by surrounding them with “empty ords” (e.g., \verb!{}={}!).
+Both are accepted. The empty  \verb!{}! do not have width themselves.
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\section{\texttt{multline} {\color{red} \Large $\mathbf{\times}$}}
+%--------------------------------------------------------------------------
+Using \verb!multline! Environment:
+
+\begin{multline}
+Z=x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_{10}\\
++ a + b
+\end{multline}
+
+\begin{verbatim}
+\begin{multline} \label{eq: }
+Z=x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 +
+x_8 + x_9 + x_{10}\\
++ a + b
+\end{multline}
+\end{verbatim}
+
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\section{\texttt{spilt}}
+%--------------------------------------------------------------------------
+Using \verb!spilt! environment is recommended for the typical IEEE style!
+
+Like \verb!multline!, the \verb!split! environment is for single equations that are too long
+to fit on one line. Unlike \verb!multline!, \verb!split! can use \& to mark alignment. 
+Unlike the other amsmath equation structures, the split environment provides no numbering and must be used inside some others such as equation, align,...
+
+\begin{equation}
+\begin{split}
+\begin{split}
+H=& \sum_l\prod\limits^p_{i=1} 
+\binom{n_i}{l _i} \\
+& \times \sum^p_{i=1}n_i
+\end{split}
+\end{split}
+\end{equation}
+
+\begin{verbatim}
+\begin{equation} \label{eq: }
+\begin{split}
+H=& \sum_l\prod\limits^p_{i=1} 
+\binom{n_i}{l _i} \\
+& \times \sum^p_{i=1}n_i
+\end{split}
+\end{equation}
+\end{verbatim}
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\section{\texttt{align}}
+%--------------------------------------------------------------------------
+It is from \texttt{amsmath.sty} package!
+
+\begin{align}
+Z=&x_1 + x_2 + x_3 + x_4 + x_5 + x_6  \nonumber\\
+&+ a + b
+\end{align}
+
+\begin{verbatim}
+\begin{align}
+Z=&x_1 + x_2 + x_3 + x_4 + x_5 + x_6  
+\nonumber\\
+&+ a + b
+\end{align}
+\end{verbatim}
+
+
+It is trivial to see another uses for \verb!alighn! as:
+
+\begin{align}
+Z&=x_1+x_2+x_3+x_4+x_5+x_6\nonumber\\
+&=a + b
+\end{align}
+
+
+\begin{verbatim}
+\begin{align} \label{eq: }
+Z&=x_1+x_2+x_3+x_4+x_5+x_6\nonumber\\
+&=a + b
+\end{align}
+\end{verbatim}
+
+
+\subsection{\texttt{align}: Multi-Col Single-Row}
+
+\begin{align}
+A=1 && B=2
+\end{align}
+
+\begin{verbatim}
+\begin{align} \label{eq: }
+A=1 && B=2
+\end{align}
+\end{verbatim}
+
+\begin{align}
+A=1 && B=2 && C=3 && D=4 && F=5
+\end{align}
+
+\begin{verbatim}
+\begin{align} \label{eq: }
+A=1 && B=2 && C=3 && D=4 && F=5
+\end{align}
+\end{verbatim}
+
+
+\subsection{\texttt{align}: Multi-Col Multi-Row}
+
+\begin{align}
+A&=B  &C&=D\nonumber\\
+E&=F  &G&=H
+\end{align}
+
+\begin{verbatim}
+\begin{align}
+A&=B  &C&=D\nonumber\\
+E&=F  &G&=H
+\end{align}
+\end{verbatim}
+
+and
+
+\begin{align}
+a&=b &  c&=d &  e&=f \nonumber\\
+A&=B &  C&=D &  E&=F \nonumber\\
+M&=N &  K&=k &  l&=i+j
+\end{align}
+
+\begin{verbatim}
+\begin{align} \label{eq: }
+a&=b &  c&=d &  e&=f \nonumber\\
+A&=B &  C&=D &  E&=F \\
+M&=N &  K&=k &  l&=i+j
+\end{align}
+\end{verbatim}
+
+%-------------------------------------------------------------------------------------------
+\subsection{BAD use for \texttt{align}~{{\color{red} \Large $\mathbf{\times}$}}}
+%-------------------------------------------------------------------------------------------
+\mbox{}\par \noindent Note that, in some cases:\\
+{\color{red} with \verb!align! we can not have a beautiful fomatting}.\par
+\textbf{e.g.:} see the separation in the \verb!align! to fill the column as shown below.\\
+
+\begin{align}
+\tilde{C} &= Q^TCQ,  &\hfill&  &\tilde{G}&=Q^TGQ \nonumber\\
+\tilde{B} &= Q^TB,   &\hfill&  &\tilde{L}&=LQ.
+\end{align}
+
+\begin{verbatim}
+\tilde{C} &= Q^TCQ,  &\hfill&  
+&\tilde{G}&=Q^TGQ \nonumber\\
+\tilde{B} &= Q^TB,   &\hfill&  
+&\tilde{L}&=LQ.
+\end{verbatim}
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\section{\texttt{alignat}}
+%--------------------------------------------------------------------------
+\textbullet~~In \verb!\begin{alignat}{lr}!, $lr$ is the number of equation columns. 
+\[lr=(\text{max. num. of in any row } \& + 1)/2.\]
+\centerline{e.g.:~~~~~~~\&~~~~col.1~~~~\&~~~~col.2~~~~\& }\\
+
+\textbullet~~A variant environment \verb!alignat! allows the horizontal space between equations
+to be explicitly specified in the equation.\\[8pt]
+
+\begin{alignat}{2}
+x&=y\dots         &\hspace{4pc}& \text{by (1)} \nonumber\\
+&=y'\circ y^\ast &            & \text{by (2)}        \label{eq:xxxx2} \\
+&=y(0)           &            & \text {by Axiom 1.}  \label{eq:xxxx3}
+\end{alignat}
+
+\begin{verbatim}
+\begin{alignat}{2}
+x&=y\dots   &\hspace{4pc}& \text{by (1)}
+\nonumber\\
+&=y'\circ y^\ast &   &\text{by (2)}
+\label{eq:xxxx2} \\
+&=y(0)           &   &\text{by Axiom-1.}
+\label{eq:xxxx3}
+\end{alignat}
+\end{verbatim}
+
+\begin{alignat}{3}
+A&=B  \qquad  &C&=D \qquad &E&=F \nonumber\\
+G&=H          &I&=J        &K&=M.
+\end{alignat}
+
+
+\begin{verbatim}
+\begin{alignat}{3}\label{eq:}
+A&=B  \qquad  &C&=D \qquad &E&=F \nonumber\\
+G&=H          &I&=J        &K&=M.
+\end{alignat}
+\end{verbatim}
+
+\begin{alignat}{3}
+\tilde{C} &= Q^TCQ,  &\qquad&  &\tilde{G}&=Q^TGQ \nonumber\\
+\tilde{B} &= Q^TB,   &      &  &\tilde{L}&=LQ.
+\end{alignat}
+
+\begin{verbatim}
+\begin{alignat}{3}
+\tilde{C} &= Q^TCQ, &\qquad& &\tilde{G}&=
+Q^TGQ \nonumber\\
+\tilde{B} &= Q^TB,  &      & &\tilde{L}&=
+LQ. \lable{eq: } \end{alignat}
+\end{verbatim}
+%--------------------------------------------------------------------------
+
+%--------------------------------------------------------------------------
+\noindent \textbf{Examples:}\par
+%--------------------------------------------------------------------------
+\noindent Adjustable separation between two columns:
+\begin{verbatim}
+\begin{alignat}{2}
+A=B  &\hspace{24pt}& M=N\nonumber\\
+C=D  &             & P=Q \label{eq: }
+\end{alignat}
+\end{verbatim}
+
+\begin{alignat}{2}
+A=B  &\hspace{24pt}& M=N\nonumber\\
+C=D  &             & P=Q
+\end{alignat}
+
+\begin{verbatim}
+\mathat{C}&\trieq\mat{V}\T\mat{C}\mat{V}
+\in\mathbb{R}^{m\times m} 
+&\hspace{16pt}& 
+&\mathat{G}&\trieq\mat{V}\T\mat{G}\mat{V}
+\in\mathbb{R}^{m\times m} \label{eq: }\\
+\mathat{B}&\trieq\mat{V}\T\mat{B}
+\in\mathbb{R}^{m\times n_{in}} 
+&             & 
+&\mathat{L}&\trieq\mat{L}\mat{Q}
+\in\mathbb{R}^{n_{out}\times m}\label{eq: }
+\end{verbatim}
+
+\begin{alignat}{3}
+\mathat{C}&\trieq\mat{V}\T\mat{C}\mat{V}\in \mathbb{R}^{m\times m} &\hspace{16pt}& &\mathat{G}&\trieq\mat{V}\T\mat{G}\mat{V}\in \mathbb{R}^{m\times m} \\
+\mathat{B}&\trieq\mat{V}\T\mat{B}\in \mathbb{R}^{m\times n_{in}} 
+&             & 
+&\mathat{L}&\trieq\mat{L}\mat{Q}\in \mathbb{R}^{n_{out}\times m}
+\end{alignat}
+
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\subsection{\texttt{aligned}}
+%--------------------------------------------------------------------------
+\texttt{aligned} provides total width which is the actual width of the contents; thus they can be used as a component in a containing expression. These -ed variants also take an optional [t], [b]
+or the default [c] argument to specify vertical positioning.
+
+\begin{equation*}
+\left.\begin{aligned}
+B'&=-\partial\times E,\\
+E'&=\partial\times B - 4\pi j,
+\end{aligned}
+\right\}
+\qquad \text{Maxwell's equations}
+\end{equation*}
+
+\begin{verbatim}
+\begin{equation*}
+\left.\begin{aligned}
+B'&=-\partial\times E,\\
+E'&=\partial\times B - 4\pi j,
+\end{aligned}
+\right\}
+\qquad \text{Maxwell's equations}
+\end{equation*}
+\end{verbatim}
+
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\subsection{\texttt{cases}}
+%--------------------------------------------------------------------------
+For multi-line equations in the \verb!amsmath! package there is a \verb!cases! environment to make them easy as
+\begin{equation*}
+\left|x\right|=
+\begin{cases}
+XX & \text{if} X=0, \\
+YY & \text{if} YY\le 0
+\end{cases}
+\end{equation*}
+
+\begin{verbatim}
+\begin{equation*}
+\left|x\right|=
+\begin{cases}
+XX & \text{if} X=0, \\
+YY & \text{if} YY\le 0
+\end{cases}
+\end{equation*}
+\end{verbatim}
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\subsection{\texttt{flalign}}
+%--------------------------------------------------------------------------
+The environment \verb!flalign! (``full length alignment'') stretches the space between the equation columns to the maximum possible width, leaving only enough space at the margin for the equation number.
+
+\begin{flalign}
+x&=y & X&=Y\\
+x'&=y' & X'&=Y'\\
+x+x'&=y+y' & X+X'&=Y+Y'
+\end{flalign}
+
+\begin{verbatim}
+\begin{flalign}
+x&=y & X&=Y\\
+x'&=y' & X'&=Y'\\
+x+x'&=y+y' & X+X'&=Y+Y'
+\end{flalign}
+\end{verbatim}
+
+No equation number then no space:
+
+\begin{flalign*}
+x&=y & X&=Y\\
+x'&=y' & X'&=Y'\\
+x+x'&=y+y' & X+X'&=Y+Y'
+\end{flalign*}
+
+\begin{verbatim}
+\begin{flalign*}
+x&=y & X&=Y\\
+x'&=y' & X'&=Y'\\
+x+x'&=y+y' & X+X'&=Y+Y'
+\end{flalign*}
+\end{verbatim}
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\section{Interjection of text in the Equations} \label{ch:text-interjection}
+%--------------------------------------------------------------------------
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\subsection{\texttt{flalign} for putting text in the equations}
+%--------------------------------------------------------------------------
+
+\begin{flalign}
+&\text{L.H.S:}& PF(\alpha) &= A+B & \\
+&\text{R.H.S:}& UC(\alpha) &= x & \nonumber \\
+& & &= W & 
+\end{flalign}
+
+\begin{verbatim}
+\begin{flalign}
+&\text{L.H.S:}& PF(\alpha) &= A+B & 
+\label{eq: }\\
+&\text{R.H.S:}& UC(\alpha) &=x &\nonumber\\
+& & &= W & \label{eq: }
+\end{flalign}
+\end{verbatim}
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\subsection{\texttt{align} for putting text in the multi-line}
+%--------------------------------------------------------------------------
+For a short interjection of one or two lines of text in the middle of a multiple-line display structure:
+\begin{align}
+A_1&=N_0(\lambda;\Omega')-\phi(\Omega)\\
+A_2&=\phi(\lambda;\Omega')-\phi(\lambda)\\
+\intertext{and}
+A_3&=\mathcal{N}(\lambda;\omega).
+\end{align}
+
+\begin{verbatim}
+\begin{align}
+A_1&=N_0(\lambda;\Omega')-\phi(\Omega')\\
+A_2&=\phi(\lambda;\Omega')-\phi(\lambda)\\
+\intertext{and}
+A_3&=\mathcal{N}(\lambda;\omega).
+\end{align}
+\end{verbatim}
+
+\textbf{Note:} \verb!\intertext! may only appear right after a \verb!\\! or \verb!\\*! command.\\[6pt]
+
+\noindent Also, see \Sec{ch:text-interjection-ieeeeqarray}.
+
+%--------------------------------------------------------------------------
+\noindent \dotfill
+\section{\texttt{subequations}}
+%--------------------------------------------------------------------------
+This is working \verb!IEEEtran.sty! very well!\\
+See \eqref{eq:101}, \eqref{eq:101-a}, and \eqref{eq:101-b}:
+\begin{subequations} \label{eq:101}
+	\begin{equation} \label{eq:101-a}
+	\rho(r)=\sigma^2
+	\end{equation}
+	\begin{equation} \label{eq:101-b}
+   	 M = \arctan\theta
+	\end{equation}
+\end{subequations}
+
+\begin{verbatim}
+\begin{subequations} \label{eq:}
+	\begin{equation} \label{eq: -a}
+	\rho(r)=\sigma^2 
+	\end{equation}
+	\begin{equation} \label{eq: -b}
+	 M=\arctan\theta 
+	\end{equation}
+\end{subequations}
+\end{verbatim}
+
+
+%--------------------------------------------------------------------------
+\subsection{\texttt{subequations} \& \texttt{align} together}
+%--------------------------------------------------------------------------
+
+%--------------------------------------------------------------------------
+\subsubsection{Example~1}
+%--------------------------------------------------------------------------
+See \eqref{eq:124}, \eqref{eq:124-a}, \eqref{eq:124-b}, and \eqref{eq:124-c}:
+
+\begin{subequations} \label{eq:124}
+\begin{align}
+\mat{A}&=\mat{B} \label{eq:124-a}\\
+\mat{C}&=\mat{D} \label{eq:124-b}\\
+\mat{E}&=\mat{F} \label{eq:124-c}\\
+\end{align}
+\end{subequations}
+
+
+\begin{verbatim}
+\begin{subequations} \label{eq:124}
+	\begin{align}
+	\mat{A}&=\mat{B} \label{eq:124-a}\\
+	\mat{C}&=\mat{D} \label{eq:124-b}\\
+	\mat{E}&=\mat{F} \label{eq:124-c}\\
+	\end{align}
+\end{subequations}
+\end{verbatim}
+
+%--------------------------------------------------------------------------
+\subsubsection{Example~2 - MNA-PEEC}
+%--------------------------------------------------------------------------
+\begin{subequations} \label{eq:PEEC-1}
+	\begin{align}
+	\left(\mat{G}(\bs{\xi}) + s \mat{C}(\bs{\xi})\right)\mat X(s,\bs{\xi}) &=
+	\mat{B}\mat{I}_p(s) \label{eq:PEEC-1a}\\
+	\mat{V}_p(s,\bs{\xi})&=
+	\mat{L}\mat{X}(s,\bs{\xi}) \label{eq:PEEC-1b}
+	\end{align}
+\end{subequations}
+
+\begin{verbatim}
+\begin{subequations} \label{eq:PEEC-1}
+	\begin{align}
+	\left(\mat{G}(\bs{\xi}) + s \mat{C}
+	(\bs{\xi})\right)\mat X(s,\bs{\xi}) &=
+	\mat{B}\mat{I}_p(s) \label{eq:PEEC-1a}\\
+	\mat{V}_p(s,\bs{\xi})&=
+	\mat{L}\mat{X}(s,\bs{\xi}) 
+	\label{eq:PEEC-1b}
+	\end{align}
+\end{subequations}
+\end{verbatim}
+
+%--------------------------------------------------------------------------
+\subsubsection{Example~3 - MNA}
+%--------------------------------------------------------------------------
+\begin{subequations}
+	\begin{align}
+	s\mathat{C}(s)\mathat{X}(s)+\mathat{G}\mathat{X}(s)&=
+	\mathat{B}\mat{U}(s)\\
+	\mat{I}_p(s)&=\mathat{B}\T\mathat{X}(s)
+	\end{align}
+	\text{where}
+	\begin{align}
+	\mathat{G}\trieq\mat{Q}\T\mat{G}\mat{Q}&&
+	\mathat{C}\trieq\mat{Q}\T\mat{C}\mat{Q}&&
+	\mathat{B}\trieq\mat{Q}\T\mat{B}
+	\end{align}
+\end{subequations}
+
+\begin{verbatim}
+\begin{subequations} \label{eq: }
+\begin{align}
+s\mathat{C}(s) \mathat{X}(s)+
+\mathat{G}\mathat{X}(s)&=
+\mathat{B}\mat{U}(s) \label{eq: -a}\\
+\mat{I}_p(s)&=\mathat{B}\T
+\mathat{X}(s) \label{eq: -b}
+\end{align}
+\text{where}
+\begin{align}
+\mathat{G}\trieq\mat{Q}\T\mat{G}\mat{Q}&&
+\mathat{C}\trieq\mat{Q}\T\mat{C}\mat{Q}&&
+\mathat{B}\trieq\mat{Q}\T\mat{B}
+\end{align}
+\end{subequations}
+\end{verbatim}
+
+
+%------------------------------------------------------------------------
+\noindent \dotfill
+\section{\texttt{gather}~{\color{red} \Large $\mathbf{\times}$}}
+%------------------------------------------------------------------------
+Equation groups without alignment.
+
+%------------------------------------------------------------------------
+\subsubsection{Example 1}~{\color{red} \Large $\mathbf{\times}$}
+%------------------------------------------------------------------------
+
+\begin{gather}
+H_c = \\
+\begin{split}
+&= a^2\\
+&= b^c\\
+\end{split}\\
+= H_d
+\end{gather}
+
+\begin{verbatim}
+\begin{gather} \label{eq: }
+H_c = \\
+\begin{split}
+&= a^2\\
+&= b^c\\
+\end{split} \\
+= H_d
+\end{gather}
+%
+\end{verbatim}
+
+
+%------------------------------------------------------------------------
+\subsubsection{Example 2}~{\color{red} \Large $\mathbf{\times}$}
+%------------------------------------------------------------------------
+
+\begin{gather*}
+a_0=\frac{1}{\pi}\int\limits_{-\pi}^{\pi}f(x)\,\mathrm{d}x\\[6pt]
+\begin{split}
+a_n=\frac{1}{\pi}\int\limits_{-\pi}^{\pi}f(x)\cos nx\,\mathrm{d}x=\\
+=\frac{1}{\pi}\int\limits_{-\pi}^{\pi}x^2\cos nx\,\mathrm{d}x
+\end{split}\\[6pt]
+\begin{split}
+b_n=\frac{1}{\pi}\int\limits_{-\pi}^{\pi}f(x)\sin nx\,\mathrm{d}x=\\
+=\frac{1}{\pi}\int\limits_{-\pi}^{\pi}x^2\sin nx\,\mathrm{d}x
+\end{split}\\[6pt]
+\end{gather*}
+
+\begin{verbatim}
+\begin{gather*}
+a_0=\frac{1}{\pi}\int
+\limits_{-\pi}^{\pi}f(x)\,\mathrm{d}x
+\\[6pt]
+\begin{split}
+a_n=\frac{1}{\pi}\int\limits_{-\pi}
+^{\pi}f(x)\cos nx\,\mathrm{d}x=\\
+=\frac{1}{\pi}\int\limits_{-\pi}
+^{\pi}x^2\cos nx\,\mathrm{d}x
+\end{split}\\[6pt]
+\begin{split}
+b_n=\frac{1}{\pi}\int\limits_{-\pi}
+^{\pi}f(x)\sin nx\,\mathrm{d}x=\\
+=\frac{1}{\pi}\int\limits_{-\pi}^{\pi}x
+^2\sin nx\,\mathrm{d}x
+\end{split}\\[6pt]
+\end{gather*}
+\end{verbatim}
+
+%------------------------------------------------------------------------
+\noindent \dotfill
+\section{\texttt{case} Package~{\color{red}\Large $\mathbf{\times}$}}
+%------------------------------------------------------------------------
+The \verb!cases! package provides \verb!numcases! and \verb!subnumcases! environment to produce multi-case equations with a separate equation number for each case. \\
+Their difference is how they number the sub-equations:\\
+\textbullet~ \texttt{numcases}: (1), (2), etc.\\
+\textbullet~ \texttt{subnumcases}: (1a), (1b), etc. (hence the name subnum...)\\
+
+%------------------------------------------------------------------------
+\noindent \dotfill
+\subsection{\texttt{numcases}~{\color{red}\Large $\mathbf{\times}$}}
+%------------------------------------------------------------------------
+
+\begin{verbatim}
+\begin{numcases}{\label{t101} {\Sigma:}}
+C\frac{d}{{dt}}x(t)+Gx(t)=Bu(t)
+\label{eq: -a}\\
+i(t)=Lx(t) \label{eq: -b}
+\end{numcases}
+\end{verbatim}
+%
+%
+\begin{numcases}{\label{t101} {\Sigma:}}
+C\frac{d}{{dt}}x(t)+Gx(t)=Bu(t)\\
+i(t)=Lx(t)
+\end{numcases}
+
+Using \texttt{numcases} the numbers for equations are as (1) and (2) (they do not include letters 'a' and 'b').
+
+%------------------------------------------------------------------------
+\noindent \dotfill
+\subsection{\texttt{subnumcases}~{\color{red} \Large $\mathbf{\times}$}}
+%------------------------------------------------------------------------
+\begin{subnumcases}{\boldsymbol{\Psi}:}
+C\frac{d}{dt}x(t)+Gx(t)=Bu(t)\\
+i(t)=Lx(t)
+\end{subnumcases}
+
+\begin{verbatim}
+\begin{subnumcases}{\label{eq: } {\boldsymbol{\Psi}:}}
+C\frac{d}{dt}x(t)+Gx(t)=Bu(t)
+\label{eq: -a}\\
+i(t)=Lx(t) \label{eq: -b}
+\end{subnumcases}
+\end{verbatim}
+
+Note that in \texttt{subnumcases} environment the numbers for equations includes letters 'a' and 'b', hence the name, 'subnum'; e.g. (1a) and (1b). 
+
+\newpage
+%-------------------------------------------------------------------------------
+\noindent \dotfill
+\section{IEEEtran}
+%-------------------------------------------------------------------------------
+When using any general \verb!\documentclass{}! such as ``article, report, etc.'' to access the
+IEEEtran facilities, include the following line in the preamble of your document:\\
+\verb!\usepackage{IEEEtrantools}!
+
+%-------------------------------------------------------------------------------
+\subsection{IEEEproof}
+%-------------------------------------------------------------------------------
+\begin{IEEEproof}
+This is a proof.
+\end{IEEEproof}
+
+\begin{verbatim}
+\begin{IEEEproof}
+This is a proof.
+\end{IEEEproof}
+\end{verbatim}
+Manually access \verb!\hfill\IEEEQED! as \hfill\IEEEQED\\
+Or by \verb!\hfill\IEEEQEDopen! as \hfill\IEEEQEDopen\\[4pt]
+
+\noindent To change the default from closed to open (if needed):\\
+\verb!\renewcommand{\IEEEQED}{\IEEEQEDopen}!
+
+%-------------------------------------------------------------------------------
+\par \noindent \dotfill
+\section{\texttt{IEEEeqnarray}} \label{ch:ieeeeqarray}
+%-------------------------------------------------------------------------------
+IEEEtran also provides its own unique set of alignment tools which are known as the \verb!IEEEeqnarray! family. The IEEEeqnarray environment is for multiline equations
+that occupy the entire column.
+
+\begin{IEEEeqnarray}{rCl}
+a & = & b + c \\
+& = & d + e + f + g + h
++ i + j + k \nonumber\\
+&& +\> l + m + n + o\\
+& = & p + q + r + s
+\end{IEEEeqnarray}
+
+Compare using small ``c'' (below) with capital ``C'' (above).
+
+\begin{IEEEeqnarray}{rcl}
+a & = & b + c \\
+  & = & d + e + f + g + h
+	+ i + j + k \nonumber\\
+     && +\> l + m + n + o\\
+  & = & p + q + r + s
+\end{IEEEeqnarray}
+
+
+\begin{IEEEeqnarray}{c}
+	a = \sum_{k=1}^n\sum_{\ell=1}^n
+	\sin \bigl(2\pi \, e_{\ell} \, h \bigr)
+	\IEEEeqnarraynumspace
+	\label{eq:labelc1}
+\end{IEEEeqnarray}
+
+
+%-------------------------------------------------------------------------------
+\par \noindent \dotfill
+\subsection{Interjecting text in \texttt{\textbackslash IEEEeqbarray}}
+\label{ch:text-interjection-ieeeeqarray}
+%-------------------------------------------------------------------------------
+\verb!\noalign{}! command can be used (within IEEEeqnarray family) to inject text which is outside of the alignment structure.
+
+\begin{IEEEeqnarray}{rCl}
+	\IEEEyesnumber
+	A_1&=&7  \IEEEyessubnumber\\
+	A_2&=&b+1\IEEEyessubnumber\\
+	\noalign{\noindent and\vspace{\jot}}
+	A_3&=&d+2\IEEEyessubnumber%
+\end{IEEEeqnarray}
+
+\begin{verbatim}
+\begin{IEEEeqnarray}{rCl}
+	\IEEEyesnumber
+	A_1&=&7  \IEEEyessubnumber\\
+	A_2&=&b+1\IEEEyessubnumber\\
+	\noalign{\noindent and\vspace{\jot}}
+	A_3&=&d+2\IEEEyessubnumber%
+\end{IEEEeqnarray}
+\end{verbatim}
+
+Remember the issues associated with using \verb!\noalign{}!:
+\begin{enumerate}
+\item \verb!\noalign! places its contents outside of the alignment;
+\item It does not automatically place its contents within a box;
+\item Issues with page-breaks occur around \verb!\noalign!.
+\end{enumerate}
+
+Also, see \Sec{ch:text-interjection}.
+
+
+%-------------------------------------------------------------------------------
+\par \noindent \dotfill
+\subsection{\texttt{\textbackslash IEEEeqbarray} Cases Structures}
+%-------------------------------------------------------------------------------
+\begin{equation}
+\setlength{\nulldelimiterspace}{0pt}
+|x|=\left\{
+\begin{IEEEeqnarraybox}[\relax][c]{l's}
+ x,&for $x \geq 0$\\
+-x,&for $x < 0$%
+\end{IEEEeqnarraybox}\right.
+\end{equation}
+
+
+\begin{verbatim}
+\begin{equation}
+\setlength{\nulldelimiterspace}{0pt}
+|x|=\left\{
+\begin{IEEEeqnarraybox}[\relax][c]{l's}
+x,&for $x \geq 0$\\
+-x,&for $x < 0$%
+\end{IEEEeqnarraybox}\right.
+\end{equation}
+\end{verbatim}
+
+%-------------------------------------------------------------------------------
+\par \noindent \dotfill
+\subsection{Matrices in \texttt{\textbackslash IEEEeqbarray}}
+\label{ch:mat-in-ieeeeqarray}
+%-------------------------------------------------------------------------------
+
+\begin{equation}
+I = \left(\begin{IEEEeqnarraybox*}[][c]{,c/c/c,}
+1&0&0\\
+0&1&0\\
+0&0&1%
+\end{IEEEeqnarraybox*}\right)
+\end{equation}
+
+Also, see \Sec{ch:mat-in-amsmath}.
+\newpage
+%-------------------------------------------------------------------------------
+\par \noindent \dotfill
+\section{Matrices in \texttt{amsmath}} \label{ch:mat-in-amsmath}
+%-------------------------------------------------------------------------------
+\begin{equation}
+I = \left(\begin{IEEEeqnarraybox*}[][c]{,c/c/c,}
+1&0&0\\
+0&1&0\\
+0&0&1%
+\end{IEEEeqnarraybox*}\right)
+\end{equation}
+
+\begin{verbatim}
+\begin{equation}
+I = \left(\begin{IEEEeqnarraybox*}[][c]{,c/c/c,}
+1&0&0\\
+0&1&0\\
+0&0&1%
+\end{IEEEeqnarraybox*}\right)
+\end{equation}
+\end{verbatim}
+
+
+
+%-------------------------------------------------------------------------------
+\subsection{\texttt{\textbackslash bmatrix}}
+%-------------------------------------------------------------------------------
+\[\begin{bmatrix} 
+A & B & C \\ 
+D & E & F \\ 
+G & H & I 
+\end{bmatrix}\]
+
+\begin{verbatim}
+\begin{bmatrix} 
+A & B & C \\ 
+D & E & F \\ 
+G & H & I 
+\end{bmatrix}
+\end{verbatim}
+
+$$
+\begin{bmatrix}
+-\frac{\partial G}{\partial \lambda} &
+-\frac{\partial C}{\partial \lambda}
+\end{bmatrix}
+\begin{bmatrix}	
+x(t) \\
+\frac{dx(t)}{dt} 
+\end{bmatrix}
+$$
+
+\begin{verbatim}
+\begin{bmatrix}
+-\frac{\partial G}{\partial \lambda} &
+-\frac{\partial C}{\partial \lambda}
+\end{bmatrix}
+\begin{bmatrix}	
+x(t) \\
+\frac{dx(t)}{dt} 
+\end{bmatrix}
+\end{verbatim}
+
+%-------------------------------------------------------------------------------
+\subsection{\texttt{\textbackslash array}}
+%-------------------------------------------------------------------------------
+
+$$\left[\begin{array}{ccc}
+A & B & C \\ 
+D & E & F \\ 
+G & H & I 
+\end{array}\right]$$
+
+\begin{verbatim}
+\left[\begin{array}{ccc}
+A & B & C \\ 
+D & E & F \\ 
+G & H & I 
+\end{array}\right]
+\end{verbatim}
+
+$$\left[\begin{array}{cc}
+-\frac{\partial G}{\partial \lambda} &
+-\frac{\partial C}{\partial \lambda}
+\end{array}\right]
+\left[\begin{array}{c}	
+x(t) \\
+\frac{dx(t)}{dt} 
+\end{array}\right]$$
+
+
+\begin{verbatim} 
+\left[\begin{array}{cc}
+-\frac{\partial G}{\partial \lambda} &
+-\frac{\partial C}{\partial \lambda}
+\end{array}\right]
+\left[\begin{array}{c}	
+x(t) \\
+\frac{dx(t)}{dt} 
+\end{array}\right]
+\end{verbatim}
+
+%------------------------------------------------------------------------
+\noindent \dotfill
+\subsubsection{More with \texttt{\textbackslash array}}
+%------------------------------------------------------------------------
+
+$$ \left[ \begin{array}{c|c|c}
+1 & 2 & 3 \\ \hline
+4 & 5 & 6 \\ \hline
+7 & 8 & 9
+\end{array} \right] $$
+
+\begin{center}
+	\begin{verbatim}
+	\left[ \begin{array}{c|c|c}
+	1 & 2 & 3 \\ \hline
+	4 & 5 & 6 \\ \hline
+	7 & 8 & 9
+	\end{array} \right] 
+	\end{verbatim}
+\end{center}
+
+
+$$ \begin{array}{r|rrr}
+& a & b & c \\ \hline
+1 & 2 & 3 & 4 \\
+2 & 3 & 4 & 5 \\
+3 & 4 & 5 & 0
+\end{array} $$
+
+
+\begin{verbatim}
+\begin{array}{r|rrr}
+& a & b & c \\ \hline
+1 & 2 & 3 & 4 \\
+2 & 3 & 4 & 5 \\
+3 & 4 & 5 & 0
+\end{array}
+\end{verbatim}
+
+\noindent \dotfill
+
+$$\left[\begin{array}{ccc} 
+1, & \ldots, & 3 
+\end{array}\right] $$
+$$\left[\begin{array}{*{20}{c}} 
+1, & \ldots, & 3 
+\end{array}\right] $$
+
+\begin{verbatim}
+\left[\begin{array}{*{20}{c}} 
+1, & \ldots, & 3 
+\end{array}\right]
+\end{center}
+\end{verbatim}
+
+
+%------------------------------------------------------------------------
+\noindent \dotfill
+\subsection{\textbackslash pmatrix}
+%------------------------------------------------------------------------
+To create inline small-matrix.\\[6pt]
+
+\noindent This is an example 
+$\begin{pmatrix}
+a + b + c & uv\\
+a + b & c + d
+\end{pmatrix}$ 
+showing small matrix.
+
+\begin{verbatim}
+$\begin{pmatrix}
+a + b + c & uv\\
+a + b & c + d
+\end{pmatrix}$
+\end{verbatim}
+
+
+
+%------------------------------------------------------------------------
+\noindent \dotfill
+\subsection{\textbackslash smallmatrix}
+%------------------------------------------------------------------------
+This is an example $\left(
+\begin{smallmatrix}
+a + b + c & uv\\
+a + b & c + d
+\end{smallmatrix}
+\right)$ showing smaller matrix.
+
+
+\begin{verbatim}
+$\left(
+\begin{smallmatrix}
+a + b + c & uv\\ 
+a + b & c + d    
+\end{smallmatrix} 
+\right)$ 
+\end{verbatim}
+
+
+Also, see \ref{ch:mat-in-ieeeeqarray}.\\
+
+
+\noindent \dotfill
+
+%--------------------------------------------------------------------------
+%\bibliography{\ieeebib}
+%--------------------------------------------------------------------------
+\end{document}
+
+

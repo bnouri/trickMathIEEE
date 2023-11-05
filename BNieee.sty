@@ -1,0 +1,123 @@
+%-------------------------------------------------------------------------------
+% Behzad NOURI  bn@ieee.org
+%-------------------------------------------------------------------------------
+\bibliographystyle{IEEEtran}
+\usepackage[noadjust]{cite}
+  
+\ifCLASSINFOpdf
+  \usepackage[pdftex]{graphicx}
+  \usepackage{epstopdf}
+  \DeclareGraphicsExtensions{.pdf,.jpeg,.jpg,.png,.gif,.eps,.ps}
+\else
+  \usepackage[dvips]{graphicx}
+  \DeclareGraphicsExtensions{.ps,.eps}
+\fi
+\graphicspath{{Figs/}{Photos/}}  
+\usepackage[caption=false,font=footnotesize]{subfig}    
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\interdisplaylinepenalty=2500
+
+
+%% Math:
+\usepackage{amsmath}
+\interdisplaylinepenalty=2500
+\usepackage{amssymb}  %Inld: \mathbb{}
+\usepackage{cases}    %Inld: subnumcases{}  %OPTIONAL X
+%\usepackage{mathtools}
+%\usepackage{amssymb, amsthm, amsfonts, mathtools}
+%\usepackage{cases, relsize}   %\mathlarger
+%%Altering the default fonts Should be done Cautiously; it is advised that, authors should allow IEEEtran to manage the fonts.  
+%\usepackage{amscd}
+%\usepackage{mathrsfs, latexsym, mdwmath}    %math fonts
+
+
+
+\newtheorem{theorem}{Theorem} 
+\newtheorem{lemma}{Lemma}%[theorem]
+\newtheorem{proposition}{Proposition}%[theorem]
+\newtheorem{corollary}{Corollary}%[theorem]
+\newtheorem{definition}{Definition}%[theorem]
+
+\usepackage{algorithm,algorithmic}   %%<== IEEE sugessted
+%%Or
+%\usepackage[ruled,vlined]{algorithm2e}
+%\usepackage{algorithmicx}
+
+%% FlowChart:
+\usepackage{pst-node, pst-3d}
+\usepackage{pst-blur}
+
+%% Alignmnet:
+\usepackage{array}
+
+%% Double-Col:
+\usepackage{stfloats}  %to do double column floats  (e.g., "\begin{figure*}[!b]")
+%\usepackage{dblfloatfix} %Similarly place double coulmn but delays one page 
+
+\usepackage{siunitx}
+
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\bm}[1]{\mbox{\boldmath $#1$}}
+\newcommand{\bs}[1]{\mbox{$\boldsymbol{#1}$}}
+
+%% $Formatted$:
+\newcommand{\op}[1]{\operatorname{#1}} 
+\newcommand{\mathat}[1]{\mathbf{\hat{#1}}}
+\newcommand{\matbar}[1]{\mathbf{\bar{#1}}}
+
+\newcommand{\reg}[1]{\mbox{#1\textsuperscript{\textregistered}}}
+\newcommand{\sub}[1]{\textsubscript{#1}}
+
+\newcommand{\p}{^\prime}  %For thefirst derivative
+%\newcommand{\T}{{\raisebox{4pt}{$^\intercal$}}}
+\newcommand{\T}{\mkern-2mu\raisebox{1.5pt}{$^\mathrm{T}$}}
+\newcommand{\EPS}{\boldsymbol{\mathlarger{{\varepsilon}}}}
+\newcommand{\Err}{\mathcal{E}_\mathit{rr}}
+\newcommand{\Real}[1]{\mbox{\real\mathit{e}}\brk{#1}}
+\newcommand{\trieq}{\buildrel \Delta \over =}
+
+\newcommand{\LHS}{\mathbb{C}^{-}}  %Open left-half plane in complex s-plane
+\newcommand{\RHS}{\mathbb{C}^{+}}  %Open right-half plane in complex s-plane
+
+\newcommand{\Sec}[1]{\mbox{Section~\ref{#1}}}
+\newcommand{\App}[1]{\mbox{Appendix~\ref{#1}}}
+\newcommand{\Fig}[1]{\mbox{Fig.~\ref{#1}}}  %%==> Figures
+\newcommand{\Tab}[1]{\mbox{Table~\ref{#1}}} %%==> Tables
+\newcommand{\Thm}[1]{\mbox{Theorem~\ref{#1}}}
+\newcommand{\Lem}[1]{\mbox{Lemma~\ref{#1}}}
+\newcommand{\Cor}[1]{\mbox{Corollary~\ref{#1}}}
+\newcommand{\Algo}[1]{\mbox{Algorithm~\ref{#1}}}
+\newcommand{\Flow}[1]{\mbox{Flowchart~\ref{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%     Extera  %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[pdftex,plainpages=true,pagebackref=true,breaklinks]{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=blue,filecolor=magenta,urlcolor=blue,}
+
+\usepackage{xcolor,soul,framed} %,caption
+\colorlet{shadecolor}{yellow}
+%\hl{}
+%% Bibilio:
+\newcommand{\refdir}[1]{X:/TEX/!!.TexRef/z1_Biblio/#1}
+\newcommand{\ieeebib}{\refdir{IEEEabrv},\refdir{SBNabrv},\refdir{SBN}}
+%\bibliography{IEEEabrv,SBNabrv,SBN}
+
+
+%%\usepackage{url} %e.g. \url{http://google.com}
+\usepackage{xcolor,comment}
+\newcommand{\SBNb}{\color[rgb]{0,0,1}} 
+\newcommand{\SBNg}{\color[rgb]{0,0.58,0}}
+\newcommand{\SBNr}{\color[rgb]{0.65,0.16,0}}  
+%
+%\newcommand{\SBNb}{} 
+%\newcommand{\SBNg}{} 
+%\newcommand{\SBNr}{}
+
+%-------------------------------------------------------------------------------
+\endinput   %%<==EoF
+%-------------------------------------------------------------------------------
